@@ -14,13 +14,12 @@ type User struct {
 	Password string `json:"-" gorm:"not null"`
 	FirstName string `json:"first_name"`
 	LastName  string `json:"last_name"`
-	
-	Applications []Application `json:"applications" gorm:"foreignKey:UserID"`
 }
 
 type Interview struct {
 	gorm.Model
-	ApplicationID uint   `json:"application_id" gorm:"not null"`
+	ID            uint   `json:"id" gorm:"primaryKey"`
+	ApplicationID uint   `json:"application_id" gorm:"not null;foreignKey:ApplicationID;references:ID"`
 	Round         int    `json:"round"`
 	Date          *time.Time `json:"date"`
 	Type          *string `json:"type"`
@@ -30,8 +29,8 @@ type Interview struct {
 type Application struct {
 	// Status can be: applied, rejected, interview, offer, offer_accepted, offer_rejected
 	gorm.Model
-	ID string `json:"id"`
-	UserID uint `json:"user_id" gorm:"not null"`
+	ID       uint   `json:"id" gorm:"primaryKey"`
+	UserID   uint   `json:"user_id" gorm:"not null;foreignKey:UserID;references:ID"`
 	Company string `json:"company"`
 	Status string `json:"status"`
 	Job_Title string `json:"job_title"`
@@ -42,7 +41,6 @@ type Application struct {
 	Application_Deadline *time.Time `json:"application_deadline"`
 	Application_Applied_Date *time.Time `json:"application_applied_date"`
 	Application_Rejected_Date *time.Time `json:"application_rejected_date"`
-
-	Interviews []Interview `json:"interviews" gorm:"foreignKey:ApplicationID"`
 	Interview_Failed_Date *time.Time `json:"interview_failed_date"`
+	Interview_Failed_Reason *string `json:"interview_failed_reason" gorm:"type:text"`
 }

@@ -86,19 +86,19 @@ func seedDatabase() {
 	locations := []string{"San Francisco, CA", "New York, NY", "Seattle, WA", "Austin, TX", "Boston, MA", "Los Angeles, CA", "Chicago, IL", "Denver, CO", "Remote", "Hybrid"}
 	statuses := []string{"applied", "interview", "offer", "rejected", "offer_accepted"}
 
-	applicationID := 1
+	applicationID := uint(1)
 	for _, user := range users {
 		for i := 0; i < 5; i++ {
 			appliedDate := now.AddDate(0, 0, -30+i*5)
 			deadline := appliedDate.AddDate(0, 0, 14) 
 			
 			application := structures.Application{
-				ID:                      string(rune(applicationID)),
+				ID:                      applicationID,
 				UserID:                  user.ID,
-				Company:                 companies[applicationID%len(companies)],
-				Status:                  statuses[applicationID%len(statuses)],
-				Job_Title:               jobTitles[applicationID%len(jobTitles)],
-				Job_Location:            locations[applicationID%len(locations)],
+				Company:                 companies[applicationID%uint(len(companies))],
+				Status:                  statuses[applicationID%uint(len(statuses))],
+				Job_Title:               jobTitles[applicationID%uint(len(jobTitles))],
+				Job_Location:            locations[applicationID%uint(len(locations))],
 				Application_URL:         &[]string{"https://company.com/jobs/" + string(rune(applicationID))}[0],
 				Application_Applied_Date: &appliedDate,
 				Application_Deadline:    &deadline,
