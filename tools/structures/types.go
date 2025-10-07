@@ -2,42 +2,43 @@ package structures
 
 import (
 	"time"
-
-	"gorm.io/gorm"
 )
 
 type User struct {
-	gorm.Model
-	Username string `json:"username" gorm:"unique;not null"`
-	Email    string `json:"email" gorm:"unique;not null"`
-	Password string `json:"-" gorm:"not null"`
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
+	ID        string     `json:"id,omitempty"`
+	CreatedAt time.Time  `json:"created_at,omitempty"`
+	Username  *string    `json:"username,omitempty"`
+	Email     *string    `json:"email,omitempty"`
+	FirstName *string    `json:"first_name,omitempty"`
+	LastName  *string    `json:"last_name,omitempty"`
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
 type Interview struct {
-	gorm.Model
-	ApplicationID uint   `json:"application_id" gorm:"not null;foreignKey:ApplicationID;references:ID"`
-	Round         int    `json:"round"`
-	Date          *time.Time `json:"date"`
-	Type          *string `json:"type"`
-	Result        *string `json:"result"`
+	ID        string     `json:"id,omitempty"`
+	CreatedAt time.Time  `json:"created_at,omitempty"`
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	AppliID   *string    `json:"appli_id,omitempty"`
+	Round     *int16     `json:"round,omitempty"`
+	Date      *time.Time `json:"date,omitempty"`
+	Type      *string    `json:"type,omitempty"`
+	Result    *string    `json:"result,omitempty"`
 }
 
 type Application struct {
 	// Status can be: applied, rejected, interview, offer, offer_accepted, offer_rejected
-	gorm.Model
-	UserID   uint   `json:"user_id" gorm:"not null;foreignKey:UserID;references:ID"`
-	Company string `json:"company"`
-	Status string `json:"status"`
-	Job_Title string `json:"job_title"`
-	Job_Location string `json:"job_location"`
-	Job_Notes *string `json:"job_notes"`
-
-	Application_URL *string `json:"application_url"`
-	Application_Deadline *time.Time `json:"application_deadline"`
-	Application_Applied_Date *time.Time `json:"application_applied_date"`
-	Application_Rejected_Date *time.Time `json:"application_rejected_date"`
-	Interview_Failed_Date *time.Time `json:"interview_failed_date"`
-	Interview_Failed_Reason *string `json:"interview_failed_reason" gorm:"type:text"`
+	ID                    string     `json:"id,omitempty"`
+	UserID                *string    `json:"user_id"`
+	CreatedAt             time.Time  `json:"created_at,omitempty"`
+	UpdatedAt             *time.Time `json:"updated_at,omitempty"`
+	Company               *string    `json:"company"`
+	Status                *string    `json:"status,omitempty"`
+	AppliTitle            *string    `json:"appli_title,omitempty"`
+	AppliLocation         *string    `json:"appli_location,omitempty"`
+	AppliNotes            *string    `json:"appli_notes,omitempty"`
+	AppliURL              *string    `json:"appli_url,omitempty"`
+	AppliDeadline         *time.Time `json:"appli_deadline,omitempty"`
+	AppliRejected         *time.Time `json:"appli_rejected,omitempty"`
+	InterviewFailedDate   *time.Time `json:"interview_failed_date,omitempty"`
+	InterviewFailedReason *string    `json:"interview_failed_reason,omitempty"`
 }
