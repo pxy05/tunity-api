@@ -8,7 +8,6 @@ import (
 
 type User struct {
 	gorm.Model
-	ID       uint   `json:"id" gorm:"primaryKey"`
 	Username string `json:"username" gorm:"unique;not null"`
 	Email    string `json:"email" gorm:"unique;not null"`
 	Password string `json:"-" gorm:"not null"`
@@ -18,7 +17,6 @@ type User struct {
 
 type Interview struct {
 	gorm.Model
-	ID            uint   `json:"id" gorm:"primaryKey"`
 	ApplicationID uint   `json:"application_id" gorm:"not null;foreignKey:ApplicationID;references:ID"`
 	Round         int    `json:"round"`
 	Date          *time.Time `json:"date"`
@@ -29,7 +27,6 @@ type Interview struct {
 type Application struct {
 	// Status can be: applied, rejected, interview, offer, offer_accepted, offer_rejected
 	gorm.Model
-	ID       uint   `json:"id" gorm:"primaryKey"`
 	UserID   uint   `json:"user_id" gorm:"not null;foreignKey:UserID;references:ID"`
 	Company string `json:"company"`
 	Status string `json:"status"`

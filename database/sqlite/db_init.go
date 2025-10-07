@@ -93,7 +93,6 @@ func seedDatabase() {
 			deadline := appliedDate.AddDate(0, 0, 14) 
 			
 			application := structures.Application{
-				ID:                      applicationID,
 				UserID:                  user.ID,
 				Company:                 companies[applicationID%uint(len(companies))],
 				Status:                  statuses[applicationID%uint(len(statuses))],
