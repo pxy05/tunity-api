@@ -5,7 +5,7 @@ import (
 )
 
 type User struct {
-	ID        string     `json:"id,omitempty"`
+	ID        *string     `json:"id,omitempty"`
 	CreatedAt time.Time  `json:"created_at,omitempty"`
 	Username  *string    `json:"username,omitempty"`
 	Email     *string    `json:"email,omitempty"`
@@ -15,7 +15,7 @@ type User struct {
 }
 
 type Interview struct {
-	ID        string     `json:"id,omitempty"`
+	ID        *string     `json:"id,omitempty"`
 	CreatedAt time.Time  `json:"created_at,omitempty"`
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	AppliID   *string    `json:"appli_id,omitempty"`
@@ -27,7 +27,7 @@ type Interview struct {
 
 type Application struct {
 	// Status can be: applied, rejected, interview, offer, offer_accepted, offer_rejected
-	ID                    string     `json:"id,omitempty"`
+	ID                    *string     `json:"id,omitempty"`
 	UserID                *string    `json:"user_id"`
 	CreatedAt             time.Time  `json:"created_at,omitempty"`
 	UpdatedAt             *time.Time `json:"updated_at,omitempty"`

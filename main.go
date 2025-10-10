@@ -34,8 +34,9 @@ func main() {
 	router.POST("/applications", endpoints.SBAddApplication)
 	// router.GET("/applications/:id", endpoints.GetApplicationById)
 
-	// router.POST("/users", endpoints.AddUser)
+	router.POST("/users", endpoints.SBAddUser)
 	router.GET("/users", endpoints.SBGetAllUsers)
+	router.PUT("/users/:user_id", endpoints.SBUpdateUser)
 	//router.GET("/users/:user_id", endpoints.SBGetUserById)
 
 	router.Run("localhost:8080")
