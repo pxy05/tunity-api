@@ -36,6 +36,7 @@ func main() {
 
 	router.POST("/users", endpoints.SBAddUser)
 	router.GET("/users", endpoints.SBGetAllUsers)
+	router.GET("/users/:user_id", endpoints.SBGetUser)
 	router.PUT("/users/:user_id", endpoints.SBUpdateUser)
 	//router.GET("/users/:user_id", endpoints.SBGetUserById)
 

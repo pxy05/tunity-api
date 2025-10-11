@@ -85,3 +85,22 @@ func SBUpdateUser(c *gin.Context) {
 
 	c.IndentedJSON(http.StatusOK, user)
 }
+
+func SBGetUser(c *gin.Context) {
+	user_id := c.Param("user_id")
+	db := supabase.GetDB()
+	user := structures.User{}
+
+	data, _, error := db.From("users").Select("*", "", false).Filter("id", "eq", user_id).Single().Execute()
+	if error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": error.Error()})
+		return
+	}
+	if err := json.Unmarshal([]byte(string(data)), &user); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.IndentedJSON(http.StatusOK, user)
+
+}
