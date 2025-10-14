@@ -11,17 +11,12 @@ import (
 	"github.com/joho/godotenv"
 )
 
-
-
-
-
 func main() {
 
-	
 	godotenv.Load()
 	supabase.InitDB(os.Getenv("SUPABASE_URL"), os.Getenv("SUPABASE_SERVICE_ROLE_KEY"))
 	router := gin.Default()
-	
+
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:3000"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
@@ -32,6 +27,7 @@ func main() {
 
 	router.GET("/users/applications/:user_id", endpoints.SBGetApplicationsByUserID)
 	router.POST("/applications", endpoints.SBAddApplication)
+	router.PUT("/applications/:appli_id", endpoints.SBEditApplication)
 	// router.GET("/applications/:id", endpoints.GetApplicationById)
 
 	router.POST("/users", endpoints.SBAddUser)
